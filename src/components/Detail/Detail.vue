@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLoading" class="loading-overlay">
-    <div class="spinner"></div> <!-- لودینگ اسپیندر -->
+    <div class="spinner"></div> 
   </div>
 
   <div v-else-if="car" class="detail-page">
@@ -159,12 +159,12 @@ export default {
 }
 
 .spinner {
-  border: 8px solid #f3f3f3; /* رنگ پس زمینه */
-  border-top: 8px solid #3498db; /* رنگ اسپینر */
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #3498db; 
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 2s linear infinite; /* انیمیشن چرخش */
+  animation: spin 2s linear infinite; 
 }
 
 @keyframes spin {

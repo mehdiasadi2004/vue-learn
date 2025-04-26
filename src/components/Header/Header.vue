@@ -32,7 +32,7 @@ export default {
 
 .logo {
   font-weight: 800;
-  font-size: 2.25rem; /* text-4xl */
+  font-size: 2.25rem; 
   font-family: serif;
 }
 </style>

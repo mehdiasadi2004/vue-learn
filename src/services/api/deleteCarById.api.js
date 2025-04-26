@@ -6,7 +6,7 @@ export async function deleteCar(id) {
 
   try {
     const response = await axios.delete(url)
-    return response.data // دیتایی که API برمیگردونه
+    return response.data
   } catch (error) {
     console.error('Error deleting car:', error)
     throw error

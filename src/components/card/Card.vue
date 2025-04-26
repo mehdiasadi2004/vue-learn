@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 .card {
-  background-color: #0f0f0f; /* معادل LightGrayBlue فرضی */
+  background-color: #0f0f0f; 
   height: 250px;
   width: 400px;
   border-radius: 8px;
@@ -65,14 +65,14 @@ export default {
 }
 
 .name {
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.125rem; 
   font-weight: bold;
   color: #f1f1f1;
 }
 
 .title {
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem; 
   line-height: 16px;
-  color: #b3b3b3; /* معادل text-BoxBg فرضی */
+  color: #b3b3b3; 
 }
 </style>
