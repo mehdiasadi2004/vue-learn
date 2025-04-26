@@ -1,32 +1,40 @@
 <template>
   <div>
-    <!-- نمایش لودینگ اگر داده‌ها در حال بارگذاری هستند -->
     <div v-if="isLoading" class="loading-overlay">
-      <div class="spinner"></div> <!-- اسپیندر لودینگ -->
+      <div class="spinner"></div>
     </div>
 
-    <!-- نمایش ماشین‌ها زمانی که داده‌ها بارگذاری شدند -->
-    <div class="container" v-if="!isLoading && cars.length > 0">
-      <Card
-        v-for="car in cars"
-        :key="car.id"
-        :id="car.id"
-        :name="car.name"
-        :title="car.titel"
-        :img="car.image"
-      />
-    </div>
+    <div v-else>
+      <div class="search-container">
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Search for a car..."
+          class="search-input"
+        />
+      </div>
 
-    <!-- اگر هیچ داده‌ای وجود نداشته باشد -->
-    <div v-else class="loading">
-      No cars available at the moment.
+      <div v-if="filteredCars.length > 0" class="container">
+        <Card
+          v-for="car in filteredCars"
+          :key="car.id"
+          :id="car.id"
+          :name="car.name"
+          :title="car.title"
+          :img="car.image"
+        />
+      </div>
+
+      <div v-else class="loading">
+        No cars found.
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Card from '../card/Card.vue'
-import { fetchCars } from '/src/services/api/getAllCar.api'; // ایمپورت سرویس API
+import Card from '../card/Card.vue';
+import { fetchCars } from '/src/services/api/getAllCar.api';
 
 export default {
   name: 'IndexPage',
@@ -35,15 +43,23 @@ export default {
   },
   data() {
     return {
-      cars: [],  // لیست ماشین‌ها
-      isLoading: true,  // وضعیت لودینگ
+      cars: [],
+      isLoading: true,
+      searchQuery: '', 
+    };
+  },
+  computed: {
+    filteredCars() {
+      if (!this.searchQuery) return this.cars;
+      const query = this.searchQuery.toLowerCase();
+      return this.cars.filter(car => car.name.toLowerCase().includes(query));
     }
   },
   async created() {
     try {
-      const carsData = await fetchCars(); // دریافت داده‌ها از API
-      this.cars = carsData; // ست کردن داده‌ها در state
-      this.isLoading = false;  // تغییر وضعیت لودینگ
+      const carsData = await fetchCars();
+      this.cars = carsData;
+      this.isLoading = false;
     } catch (error) {
       console.error('Error loading cars:', error);
       this.isLoading = false;
@@ -61,12 +77,30 @@ export default {
   justify-content: center;
 }
 
-/* استایل لودینگ */
-.loading-overlay {
-min-height: 100vh;
+/* استایل سرچ */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
 
+.search-input {
+  width: 300px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: #3498db;
+}
+
+.loading-overlay {
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,12 +108,12 @@ min-height: 100vh;
 }
 
 .spinner {
-  border: 8px solid #f3f3f3; /* رنگ پس زمینه */
-  border-top: 8px solid #3498db; /* رنگ اسپینر */
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 2s linear infinite; /* انیمیشن چرخش */
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
@@ -87,11 +121,11 @@ min-height: 100vh;
   100% { transform: rotate(360deg); }
 }
 
-/* استایل پیغام عدم موجودی داده‌ها */
 .loading {
   text-align: center;
   margin-top: 2rem;
   font-size: 1.5rem;
   color: gray;
+  min-height: 80vh;
 }
 </style>

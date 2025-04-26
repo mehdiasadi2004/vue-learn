@@ -22,7 +22,7 @@ export default {
 .footer {
   width: 100%;
   height: 350px;
-  border-top: 2px solid #f0f4f8; /* معادل border-LightGrayBlue */
+  border-top: 2px solid #f0f4f8; 
   display: flex;
   align-items: center;
   justify-content: space-evenly;

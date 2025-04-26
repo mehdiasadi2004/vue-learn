@@ -24,31 +24,40 @@
 </template>
 
 <script>
-import { fetchCarDetail } from '/src/services/api/getCarById.api'; // ایمپورت سرویس API
+import { fetchCarDetail } from '/src/services/api/getCarById.api'; 
+import { deleteCar } from '/src/services/api/deleteCarById.api'; 
 
 export default {
   name: 'DetailPage',
   data() {
     return {
-      car: null,  // داده‌های ماشین
-      isLoading: true,  // وضعیت لودینگ
+      car: null,
+      isLoading: true,
     }
   },
   async created() {
-    const carId = this.$route.params.id;  // گرفتن ID از URL (با استفاده از Vue Router)
+    const carId = this.$route.params.id;
     try {
-      const carData = await fetchCarDetail(carId); // دریافت جزئیات ماشین
-      this.car = carData;  // ذخیره کردن داده‌ها در state
-      this.isLoading = false;  // تغییر وضعیت لودینگ
+      const carData = await fetchCarDetail(carId);
+      this.car = carData;
+      this.isLoading = false;
     } catch (error) {
       console.error('Error loading car details:', error);
       this.isLoading = false;
     }
   },
   methods: {
-    deleteCar() {
-      alert('Car deleted!');
-      // می‌توانید برای حذف درخواست به API هم اضافه کنید
+    async deleteCar() {
+      const confirmDelete = confirm('Are you sure you want to delete this car?');
+      if (!confirmDelete) return;
+
+      try {
+        await deleteCar(this.car.id); 
+        alert('Car deleted successfully!');
+        this.$router.push('/'); 
+      } catch (error) {
+        alert('Error deleting the car.');
+      }
     }
   }
 }

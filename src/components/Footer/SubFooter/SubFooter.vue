@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .section-title {
   font-weight: 600;
-  font-size: 1.25rem; /* text-xl */
+  font-size: 1.25rem; 
 }
 
 .item {
@@ -48,6 +48,6 @@ export default {
 }
 
 .item:hover {
-  color: #06b6d4; /* cyan-500 */
+  color: #06b6d4; 
 }
 </style>
