@@ -8,7 +8,7 @@
       <img :src="car.image" :alt="car.name" class="car-image" />
       <div class="info-overlay">
         <h1 class="car-name">{{ car.name }}</h1>
-        <p class="car-title">{{ car.title }}</p>
+        <p class="car-title">{{ car.titel }}</p>
         <p class="car-date">Date: {{ car.date }}</p>
       </div>
     </div>

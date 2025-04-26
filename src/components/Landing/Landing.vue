@@ -20,7 +20,7 @@
           :key="car.id"
           :id="car.id"
           :name="car.name"
-          :title="car.title"
+          :title="car.titel"
           :img="car.image"
         />
       </div>
