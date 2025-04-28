@@ -1,7 +1,8 @@
 <template>
   <div @click="goToDetail" class="card">
     <div class="card-img">
-      <img :src="img" class="img" />
+      <img :src="'/public/' + img" class="img" />
+
     </div>
     <div class="card-content">
       <span class="name">{{ name }}</span>

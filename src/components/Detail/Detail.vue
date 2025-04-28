@@ -5,7 +5,7 @@
 
   <div v-else-if="car" class="detail-page">
     <div class="car-info">
-      <img :src="car.image" :alt="car.name" class="car-image" />
+      <img :src="'/public/' + car.image" class="car-image" />
       <div class="info-overlay">
         <h1 class="car-name">{{ car.name }}</h1>
         <p class="car-title">{{ car.titel }}</p>
